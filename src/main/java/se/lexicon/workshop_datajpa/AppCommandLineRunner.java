@@ -23,8 +23,8 @@ public class AppCommandLineRunner implements CommandLineRunner {
         System.out.println("###############");
         AppUser createdAppUser1 = appUserDao.persist(
                 new AppUser(
-                        "test_username",
-                        "test_password"
+                        "admin",
+                        "*****"
                 )
         );
         System.out.println("############### : " + createdAppUser1.getAppUserId());
@@ -32,9 +32,9 @@ public class AppCommandLineRunner implements CommandLineRunner {
         System.out.println();
         Details createdDetails1 = detailsDao.persist(
                 new Details(
-                        "test_firstName",
-                        "test_lastName",
-                        "test@email.com"
+                        "Mikael",
+                        "Svensson",
+                        "ms@email.com"
                 )
         );
         System.out.println("############### : " + createdDetails1.getDetailsId());

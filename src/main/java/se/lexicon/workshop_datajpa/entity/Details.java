@@ -16,8 +16,8 @@ public class Details {
     private String lastName;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "appUserId")
+    @OneToOne(mappedBy = "details",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private AppUser appUser;
     
     public Details() {
