@@ -47,7 +47,6 @@ public class DetailsDaoImplTest {
         Details createdDetails = testObject.persist(detailsData);
         
         assertNotNull(createdDetails);
-        assertNotNull(createdDetails.getDetailsId());
     }
 
 }

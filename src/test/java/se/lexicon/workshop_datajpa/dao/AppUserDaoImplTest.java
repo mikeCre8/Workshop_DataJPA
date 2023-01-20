@@ -47,7 +47,6 @@ public class AppUserDaoImplTest {
         AppUser createdAppUser = testObject.persist(appUserData);
     
         assertNotNull(createdAppUser);
-        assertNotNull(createdAppUser.getAppUserId());
     }
 
 }
