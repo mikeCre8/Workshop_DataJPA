@@ -16,9 +16,6 @@ public class AppUser {
     @Column(nullable = false, length = 100)
     private String password;
     private LocalDateTime registrationDate;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "detailsId")
-    private Details details;
     
     public AppUser() {
         this.registrationDate = LocalDateTime.now();
@@ -62,25 +59,20 @@ public class AppUser {
         this.registrationDate = registrationDate;
     }
     
-    public Details getDetails() {
-        return details;
-    }
-    
-    public void setDetails( Details details ) {
-        this.details = details;
-    }
-    
     @Override
     public boolean equals( Object o ) {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return appUserId == appUser.appUserId && Objects.equals(username, appUser.username) && Objects.equals(password, appUser.password) && Objects.equals(registrationDate, appUser.registrationDate) && Objects.equals(details, appUser.details);
+        return appUserId == appUser.appUserId &&
+                Objects.equals(username, appUser.username) &&
+                Objects.equals(password, appUser.password) &&
+                Objects.equals(registrationDate, appUser.registrationDate);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(appUserId, username, password, registrationDate, details);
+        return Objects.hash(appUserId, username, password, registrationDate);
     }
     
     @Override
@@ -90,7 +82,6 @@ public class AppUser {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", registrationDate=" + registrationDate +
-                ", details=" + details +
                 '}';
     }
 }

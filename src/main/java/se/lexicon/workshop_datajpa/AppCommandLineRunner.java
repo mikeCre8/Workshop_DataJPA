@@ -3,6 +3,7 @@ package se.lexicon.workshop_datajpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.workshop_datajpa.dao.AppUserDao;
 import se.lexicon.workshop_datajpa.dao.DetailsDao;
 import se.lexicon.workshop_datajpa.entity.AppUser;
@@ -18,6 +19,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
     DetailsDao detailsDao;
     
     @Override
+    @Transactional
     public void run( String... args ) throws Exception {
     
         System.out.println("###############");
@@ -38,6 +40,6 @@ public class AppCommandLineRunner implements CommandLineRunner {
                 )
         );
         System.out.println("############### : " + createdDetails1.getDetailsId());
-        
+        createdDetails1.setAppUser(createdAppUser1);
     }
 }

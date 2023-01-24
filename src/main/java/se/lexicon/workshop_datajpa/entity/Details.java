@@ -16,8 +16,12 @@ public class Details {
     private String lastName;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToOne(mappedBy = "details",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.REMOVE,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH})
     private AppUser appUser;
     
     public Details() {
@@ -28,6 +32,28 @@ public class Details {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+    
+    public Details( int detailsId, String firstName, String lastName, String email) {
+        this.detailsId = detailsId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    
+    public Details( String firstName, String lastName, String email, AppUser appUser ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.appUser = appUser;
+    }
+    
+    public Details( int detailsId, String firstName, String lastName, String email, AppUser appUser ) {
+        this.detailsId = detailsId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.appUser = appUser;
     }
     
     public int getDetailsId() {
@@ -63,12 +89,15 @@ public class Details {
     }
     
     public AppUser getAppUser() {
+        if(appUser == null) appUser = new AppUser();
         return appUser;
     }
     
     public void setAppUser( AppUser appUser ) {
+        
         this.appUser = appUser;
     }
+    
     
     @Override
     public boolean equals( Object o ) {
