@@ -2,6 +2,7 @@ package se.lexicon.workshop_datajpa.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -18,10 +19,16 @@ public class Book {
     @Column
     private int maxLoanDays;
     
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @JoinTable(name = "books_authors"
+            , joinColumns = @JoinColumn(name = "book_id")
+            , inverseJoinColumns = @JoinColumn(name = "author_id"))
+    Set<Author> authors;
+    
     public Book() {
     }
     
-    public Book( String isbn, String title ) {
+    public Book( String isbn, String title) {
         this.isbn = "ISBN-"+isbn;
         this.title = title;
     }
