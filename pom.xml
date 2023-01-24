@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>se.lexicon</groupId>
-    <artifactId>Workshop_DataJPA</artifactId>
+    <artifactId>Workshop_ORM_DataJPA</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Workshop_DataJPA</name>
     <description>Workshop_DataJPA</description>

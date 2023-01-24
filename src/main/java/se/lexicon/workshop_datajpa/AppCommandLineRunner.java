@@ -13,19 +13,20 @@ import java.time.LocalDate;
 @Component
 public class AppCommandLineRunner implements CommandLineRunner {
     
-    @Autowired
-    AppUserDao appUserDao;
-    @Autowired
-    DetailsDao detailsDao;
+    private AppUserDao appUserDao;
+    private DetailsDao detailsDao;
+    private BookDao bookDao;
+    private BookLoanDao bookLoanDao;
+    private AuthorDao authorDao;
     
     @Autowired
-    BookDao bookDao;
-    
-    @Autowired
-    BookLoanDao bookLoanDao;
-    
-    @Autowired
-    AuthorDao authorDao;
+    public AppCommandLineRunner( AppUserDao appUserDao, DetailsDao detailsDao, BookDao bookDao, BookLoanDao bookLoanDao, AuthorDao authorDao ) {
+        this.appUserDao = appUserDao;
+        this.detailsDao = detailsDao;
+        this.bookDao = bookDao;
+        this.bookLoanDao = bookLoanDao;
+        this.authorDao = authorDao;
+    }
     
     @Override
     @Transactional
