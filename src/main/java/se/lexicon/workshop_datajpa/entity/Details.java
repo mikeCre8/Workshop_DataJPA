@@ -16,19 +16,12 @@ public class Details {
     private String lastName;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToOne(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.REMOVE,
-            CascadeType.MERGE,
-            CascadeType.DETACH,
-            CascadeType.REFRESH})
-    private AppUser appUser;
+    
     
     public Details() {
     }
     
     public Details( String firstName, String lastName, String email ) {
-        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -39,21 +32,6 @@ public class Details {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-    }
-    
-    public Details( String firstName, String lastName, String email, AppUser appUser ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.appUser = appUser;
-    }
-    
-    public Details( int detailsId, String firstName, String lastName, String email, AppUser appUser ) {
-        this.detailsId = detailsId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.appUser = appUser;
     }
     
     public int getDetailsId() {
@@ -88,15 +66,7 @@ public class Details {
         this.email = email;
     }
     
-    public AppUser getAppUser() {
-        if(appUser == null) appUser = new AppUser();
-        return appUser;
-    }
-    
-    public void setAppUser( AppUser appUser ) {
-        
-        this.appUser = appUser;
-    }
+  
     
     
     @Override
@@ -107,13 +77,12 @@ public class Details {
         return detailsId == details.detailsId &&
                 Objects.equals(firstName, details.firstName) &&
                 Objects.equals(lastName, details.lastName) &&
-                Objects.equals(email, details.email) &&
-                Objects.equals(appUser, details.appUser);
+                Objects.equals(email, details.email);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(detailsId, firstName, lastName, email, appUser);
+        return Objects.hash(detailsId, firstName, lastName, email);
     }
     
     @Override
@@ -123,7 +92,6 @@ public class Details {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", appUser=" + appUser +
                 '}';
     }
 }

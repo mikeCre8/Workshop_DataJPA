@@ -21,6 +21,14 @@ public class AppUser {
         this.registrationDate = LocalDateTime.now();
     }
     
+    @OneToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.REMOVE,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH})
+    private Details details;
+    
     public AppUser( String username, String password ) {
         this();
         this.username = username;
@@ -57,6 +65,15 @@ public class AppUser {
     
     public void setRegistrationDate( LocalDateTime registrationDate ) {
         this.registrationDate = registrationDate;
+    }
+    
+    public Details getDetails() {
+        if(details == null) details = new Details();
+        return details;
+    }
+    
+    public void setDetails( Details details ) {
+        this.details = details;
     }
     
     @Override
