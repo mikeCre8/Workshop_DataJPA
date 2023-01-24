@@ -2,6 +2,8 @@ package se.lexicon.workshop_datajpa.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +30,9 @@ public class AppUser {
             CascadeType.DETACH,
             CascadeType.REFRESH})
     private Details details;
+    
+    @OneToMany
+    private List<BookLoan> loans;
     
     public AppUser( String username, String password ) {
         this();
@@ -74,6 +79,19 @@ public class AppUser {
     
     public void setDetails( Details details ) {
         this.details = details;
+    }
+    
+    public List<BookLoan> getLoans() {
+        if(loans == null) loans = new ArrayList<>();
+        return loans;
+    }
+    
+    public void setLoans( List<BookLoan> loans ) {
+        this.loans = loans;
+    }
+    
+    public void addLoans(){
+        if(loans == null) loans = new ArrayList<>();
     }
     
     @Override

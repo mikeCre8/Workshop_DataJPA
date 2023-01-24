@@ -1,6 +1,7 @@
 package se.lexicon.workshop_datajpa.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -53,6 +54,22 @@ public class Book {
     
     public void setTitle( String title ) {
         this.title = title;
+    }
+    
+    public void addAuthor(Author author){
+        if(author == null) throw new IllegalArgumentException("author is null");
+        if(authors == null) authors = new HashSet<>();
+        if(!author.getWrittenBooks().contains(this)) {
+            authors.add(author);
+        }
+    }
+    
+    public void removeAuthor(Author author){
+        if(author == null) throw new IllegalArgumentException("author is null");
+        if(authors == null) authors = new HashSet<>();
+        
+        author.getWrittenBooks().remove(this);
+        authors.remove(author);
     }
     
     @Override
